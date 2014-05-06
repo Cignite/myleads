@@ -1,0 +1,82 @@
+{% extends 'bsct/base.html' %}
+{% load sorting_tags %}
+{% load bscttags %}
+ 
+{% block BSCT_CONTENT %}
+
+{% block BSCT_LIST_ITEMS %}
+<table class = 'table table-striped tablesorter' id="myTable">
+
+        <thead>
+            <th> {% get_verbose_name_plural object_list.model %} </th>
+            <th class="header headerSortUp"> Income (mil)</th>
+            <th> Email</th>
+            <th> Phone</th>
+            <th> Action </th>
+        </thead>
+
+        {% for object in object_list %}
+        <tr>
+            <td> 
+                {% block BSCT_LIST_ITEMS_ITEM %}
+                {{object}} 
+                {% endblock %}
+            </td>
+            <td> 
+                {{object.income}} 
+            </td>
+            <td> 
+                {%if object.email == "-"%}
+                   {{object.email}} 
+                {%else%}
+                    <a href="mailto:{{object.email}}">{{object.email}}</a>
+                {%endif%}
+            </td>
+            <td> 
+                {{object.phone}}
+            </td>
+            <td>
+                {% block BSCT_LIST_ITEMS_ACTIONS %}
+                <a
+                    class = 'btn'
+                    href  = '{{object.get_absolute_url}}'
+                >
+                    Edit
+                </a>
+                {% endblock %}
+            </td>
+        </tr>
+        {% endfor %}
+
+</table>
+{% endblock %}
+
+
+
+{% block BSCT_LIST_PAGINATION %}
+{% if is_paginated %}
+{% load i18n %}
+<div class="pagination">
+    <ul>
+    {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+    {% else %}
+        <li class="disabled prev"><a href="#">&lsaquo;&lsaquo; {% trans "previous" %}</a></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+
+    {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}" class="next">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+    {% else %}
+        <li class="disabled next"><a href="#">{% trans "next" %} &rsaquo;&rsaquo;</a></li>
+    {% endif %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+
+</div>
+
+{% endblock %}

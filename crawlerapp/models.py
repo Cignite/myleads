@@ -16,3 +16,4 @@ class Company(BSCTModelMixin, models.Model ):
 		verbose_name = "Company"
 		verbose_name_plural = "Companies"
  
+ 
