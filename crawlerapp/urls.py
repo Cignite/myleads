@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 from crawlerapp import models
-from bsct import views
+from crawlerapp import views
 
 urlpatterns = patterns('',
 	url( r'^$', views.ListView.as_view( model=models.Company, paginate_by = 25 ), 
