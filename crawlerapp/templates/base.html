@@ -1,0 +1,93 @@
+<html>
+
+<head>
+
+    <title>Nordic Venture Family</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.13.3/css/theme.bootstrap.css">
+    <style>
+        input { min-height: 1.8em; } 
+        footer p {
+          text-align: center;
+          margin-bottom: 10px;
+
+        }
+    </style> 
+
+    {% block BSCT_CSS %}
+    {% endblock %}
+
+</head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">Nordic Venture Family</a>
+          <form class="navbar-form navbar-right" role="search" />
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" id="search" name="search">
+          </div>
+
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="hero-unit">
+              <ul id="search-results">
+        </ul>
+        <hr>
+        {% block BSCT_MAIN %}
+        {% endblock %}
+      </div>
+
+    </div>
+
+  <hr>
+  <footer>
+    <p>&copy; Nordic Venture Family 2014 </p>
+  </footer>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.13.3/jquery.tablesorter.min.js"></script>
+  <script>
+    $(function(){
+
+    $('#search').keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: "/search/",
+
+            data: { 
+                'search_text' : $('#search').val(),
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: searchSuccess,
+            dataType: 'html'
+        });
+        
+    });
+
+});
+
+function searchSuccess(data, textStatus, jqXHR)
+{
+    $('#search-results').html(data);
+}
+
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+)
+</script>
+</body>
+</html>

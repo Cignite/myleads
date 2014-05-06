@@ -1,0 +1,44 @@
+{% if companies.count > 0 %}
+
+	{% block BSCT_CONTENT %}
+	{% block BSCT_LIST_ITEMS %}
+	<h5>About <u>{{companies.count}}</u> results</h5>
+	<table class = 'table table-striped'>
+		<thead>
+			<th>Company</th>
+	        <th> Income (mil)</th>
+	        <th> Phone</th>
+	        <th> Email</th>
+	    </thead>
+
+	    {% for company in companies %}
+	        <tr>
+	            <td> 
+	                {{company.object.company}} 
+	            </td>
+	            <td> 
+	                {{company.object.income}} 
+	            </td>
+	            <td> 
+	                {%if company.object.email == "-"%}
+	                   {{company.object.email}} 
+	                {%else%}
+	                    <a href="mailto:{{company.object.email}}">{{company.object.email}}</a>
+	                {%endif%}
+	            </td>
+	            <td> 
+	                {{company.object.phone}}
+	            </td>
+	        </tr>
+
+	    {% endfor %}
+
+	</table>
+	<h4>End of search result</h4>
+	<hr>
+	{% endblock %}
+	{% endblock %}
+
+{% else %}
+	<h4>No search result</h4>
+{% endif %}
