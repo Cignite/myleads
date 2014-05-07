@@ -5,7 +5,7 @@ from crawlerapp import models
 from crawlerapp import views
 
 urlpatterns = patterns('',
-	url( r'^$', views.ListView.as_view( model=models.Company, paginate_by = 25 ), 
+	url( r'^$', views.ListView.as_view( model=models.Company, paginate_by = 100 ), 
         name = 'company_list'), #main page
 
     url( r'update/(?P<pk>\d+)$', views.UpdateView.as_view( model=models.Company ),
