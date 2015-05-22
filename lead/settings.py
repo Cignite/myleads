@@ -1,5 +1,5 @@
 """
-Django settings for nvf project.
+Django settings for lead project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -53,9 +53,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'nvf.urls'
+ROOT_URLCONF = 'lead.urls'
 
-WSGI_APPLICATION = 'nvf.wsgi.application'
+WSGI_APPLICATION = 'lead.wsgi.application'
 
 
 DATABASES = {
@@ -106,7 +106,7 @@ def project_root( request ):
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'nvf.settings.project_root',   
+    'lead.settings.project_root',   
 )
 
 # Whoosh index directory

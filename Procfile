@@ -1,2 +1,2 @@
-web: gunicorn nvf.wsgi
+web: gunicorn lead.wsgi
 
